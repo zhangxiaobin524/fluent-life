@@ -1,0 +1,10 @@
+ENVIRONMENT: development
+PORT: "8082"
+
+DB_HOST: localhost
+DB_PORT: "5432"
+DB_USER: zhangxiaobin
+DB_PASSWORD: ""
+DB_NAME: fluent_life
+DB_SSLMODE: disable
+
