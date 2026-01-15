@@ -8,6 +8,8 @@ import {
   BarChart3,
   Shield,
   Settings,
+  MessageSquare,
+  BookOpen,
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -49,6 +51,18 @@ const menuItems: MenuItem[] = [
     label: '训练统计',
     icon: BarChart3,
     path: '/training',
+  },
+  {
+    key: 'tongue-twisters',
+    label: '绕口令管理',
+    icon: MessageSquare,
+    path: '/tongue-twisters',
+  },
+  {
+    key: 'daily-expressions',
+    label: '每日朗诵文案',
+    icon: BookOpen,
+    path: '/daily-expressions',
   },
   {
     key: 'permission',

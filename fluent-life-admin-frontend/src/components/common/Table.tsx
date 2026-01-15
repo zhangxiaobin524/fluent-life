@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 
-interface Column<T> {
+export interface Column<T> {
   key: string;
-  title: string;
+  title: string | React.ReactNode;
   dataIndex?: keyof T;
   render?: (value: any, record: T, index: number) => React.ReactNode;
   width?: number | string;
@@ -27,8 +27,8 @@ interface TableProps<T> {
 }
 
 function Table<T extends Record<string, any>>({
-  columns,
-  dataSource,
+  columns = [],
+  dataSource = [],
   loading = false,
   rowKey = 'id',
   onRow,

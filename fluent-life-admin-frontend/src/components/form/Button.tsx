@@ -5,6 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'default' | 'danger' | 'dashed';
   size?: 'small' | 'middle' | 'large';
   loading?: boolean;
+  icon?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,6 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   loading = false,
   disabled,
   className,
+  icon,
   ...props
 }) => {
   return (
@@ -63,6 +65,7 @@ const Button: React.FC<ButtonProps> = ({
           ></path>
         </svg>
       )}
+      {icon && <span className="mr-2">{icon}</span>}
       {children}
     </button>
   );

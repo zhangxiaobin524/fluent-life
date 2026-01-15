@@ -13,6 +13,7 @@ const Rooms: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [keyword, setKeyword] = useState('');
   const [filterActive, setFilterActive] = useState<string>('');
+  const [selectedRoomIds, setSelectedRoomIds] = useState<string[]>([]);
 
   useEffect(() => {
     loadRooms();
@@ -20,6 +21,7 @@ const Rooms: React.FC = () => {
 
   const loadRooms = async () => {
     setLoading(true);
+    setSelectedRoomIds([]); // Reset selection on load
     try {
       const response = await adminAPI.getRooms({
         page,
@@ -35,6 +37,43 @@ const Rooms: React.FC = () => {
       console.error('加载房间失败:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSelectRoom = (id: string, checked: boolean) => {
+    if (checked) {
+      setSelectedRoomIds((prev) => [...prev, id]);
+    } else {
+      setSelectedRoomIds((prev) => prev.filter((roomId) => roomId !== id));
+    }
+  };
+
+  const handleSelectAllRooms = (checked: boolean) => {
+    if (checked) {
+      setSelectedRoomIds(rooms.map((room) => room.id));
+    } else {
+      setSelectedRoomIds([]);
+    }
+  };
+
+  const handleBatchDelete = async () => {
+    if (selectedRoomIds.length === 0) {
+      alert('请选择要删除的房间');
+      return;
+    }
+    if (!confirm(`确定要删除选中的 ${selectedRoomIds.length} 个房间吗？此操作不可恢复！`)) return;
+
+    try {
+      const response = await adminAPI.deleteRoomsBatch(selectedRoomIds);
+      if (response.code === 0) {
+        alert('批量删除成功');
+        loadRooms();
+      } else {
+        alert(response.message || '批量删除失败');
+      }
+    } catch (error) {
+      console.error('批量删除房间失败:', error);
+      alert('批量删除失败，请重试');
     }
   };
 
@@ -68,6 +107,25 @@ const Rooms: React.FC = () => {
   };
 
   const columns = [
+    {
+      key: 'selection',
+      title: (
+        <input
+          type="checkbox"
+          checked={selectedRoomIds.length === rooms.length && rooms.length > 0}
+          onChange={(e) => handleSelectAllRooms(e.target.checked)}
+          className="form-checkbox"
+        />
+      ),
+      render: (_: any, record: Room) => (
+        <input
+          type="checkbox"
+          checked={selectedRoomIds.includes(record.id)}
+          onChange={(e) => handleSelectRoom(record.id, e.target.checked)}
+          className="form-checkbox"
+        />
+      ),
+    },
     {
       key: 'title',
       title: '房间标题',
@@ -184,6 +242,13 @@ const Rooms: React.FC = () => {
             <option value="true">活跃</option>
             <option value="false">已关闭</option>
           </select>
+          <button
+            onClick={handleBatchDelete}
+            disabled={selectedRoomIds.length === 0}
+            className="px-4 py-2 bg-red-600 text-white rounded text-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:bg-red-300 disabled:cursor-not-allowed"
+          >
+            批量删除 ({selectedRoomIds.length})
+          </button>
         </div>
         <Table
           columns={columns}

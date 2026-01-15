@@ -3,11 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/dashboard';
 import Users from './pages/users';
+import UserTrainingRecords from './pages/UserTrainingRecords';
 import Posts from './pages/Posts';
 import Rooms from './pages/Rooms';
 import Training from './pages/Training';
 import Permission from './pages/permission';
 import Settings from './pages/settings';
+import TongueTwisters from './pages/tongue-twisters';
+import DailyExpressions from './pages/daily-expressions';
 import Layout from './components/Layout';
 
 function App() {
@@ -62,6 +65,18 @@ function App() {
           }
         />
         <Route
+          path="/users/:userId/training-records"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={() => setIsAuthenticated(false)}>
+                <UserTrainingRecords />
+              </Layout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
           path="/posts"
           element={
             isAuthenticated ? (
@@ -91,6 +106,30 @@ function App() {
             isAuthenticated ? (
               <Layout onLogout={() => setIsAuthenticated(false)}>
                 <Training />
+              </Layout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/tongue-twisters"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={() => setIsAuthenticated(false)}>
+                <TongueTwisters />
+              </Layout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/daily-expressions"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={() => setIsAuthenticated(false)}>
+                <DailyExpressions />
               </Layout>
             ) : (
               <Navigate to="/login" replace />

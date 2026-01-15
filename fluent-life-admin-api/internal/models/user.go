@@ -14,6 +14,8 @@ type User struct {
 	Phone        *string    `gorm:"type:varchar(20);uniqueIndex" json:"phone,omitempty"`
 	PasswordHash string     `gorm:"type:varchar(255);not null" json:"-"`
 	AvatarURL    *string    `gorm:"type:varchar(500)" json:"avatar_url,omitempty"`
+	Status       int        `gorm:"not null;default:1" json:"status"` // 0-禁用, 1-正常
+	Gender       *string    `gorm:"type:varchar(10)" json:"gender,omitempty"` // 性别
 	CreatedAt    time.Time  `json:"created_at"`
 	UpdatedAt    time.Time  `json:"updated_at"`
 	LastLoginAt  *time.Time `json:"last_login_at,omitempty"`

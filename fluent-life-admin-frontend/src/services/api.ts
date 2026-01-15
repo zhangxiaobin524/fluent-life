@@ -51,8 +51,8 @@ export const adminAPI = {
     const response = await api.get(`/admin/posts/${id}`);
     return response.data;
   },
-  deletePost: async (id: string) => {
-    const response = await api.delete(`/admin/posts/${id}`);
+  deletePostsBatch: async (ids: string[]) => {
+    const response = await api.post('/admin/posts/delete-batch', { ids });
     return response.data;
   },
 
@@ -69,6 +69,10 @@ export const adminAPI = {
     const response = await api.delete(`/admin/rooms/${id}`);
     return response.data;
   },
+  deleteRoomsBatch: async (ids: string[]) => {
+    const response = await api.post('/admin/rooms/delete-batch', { ids });
+    return response.data;
+  },
   toggleRoom: async (id: string) => {
     const response = await api.patch(`/admin/rooms/${id}/toggle`);
     return response.data;
@@ -79,8 +83,52 @@ export const adminAPI = {
     const response = await api.get('/admin/training/stats');
     return response.data;
   },
-  getTrainingRecords: async (params: { page?: number; page_size?: number; type?: string }) => {
+  getTrainingRecords: async (params: { page?: number; page_size?: number; type?: string; user_id?: string }) => {
     const response = await api.get('/admin/training/records', { params });
+    return response.data;
+  },
+
+  // 绕口令管理
+  getTongueTwisters: async (params: { page?: number; page_size?: number; keyword?: string; level?: string; is_active?: string }) => {
+    const response = await api.get('/admin/tongue-twisters', { params });
+    return response.data;
+  },
+  getTongueTwister: async (id: string) => {
+    const response = await api.get(`/admin/tongue-twisters/${id}`);
+    return response.data;
+  },
+  createTongueTwister: async (data: any) => {
+    const response = await api.post('/admin/tongue-twisters', data);
+    return response.data;
+  },
+  updateTongueTwister: async (id: string, data: any) => {
+    const response = await api.put(`/admin/tongue-twisters/${id}`, data);
+    return response.data;
+  },
+  deleteTongueTwistersBatch: async (ids: string[]) => {
+    const response = await api.post('/admin/tongue-twisters/delete-batch', { ids });
+    return response.data;
+  },
+
+  // 每日朗诵文案管理
+  getDailyExpressions: async (params: { page?: number; page_size?: number; keyword?: string; is_active?: string }) => {
+    const response = await api.get('/admin/daily-expressions', { params });
+    return response.data;
+  },
+  getDailyExpression: async (id: string) => {
+    const response = await api.get(`/admin/daily-expressions/${id}`);
+    return response.data;
+  },
+  createDailyExpression: async (data: any) => {
+    const response = await api.post('/admin/daily-expressions', data);
+    return response.data;
+  },
+  updateDailyExpression: async (id: string, data: any) => {
+    const response = await api.put(`/admin/daily-expressions/${id}`, data);
+    return response.data;
+  },
+  deleteDailyExpressionsBatch: async (ids: string[]) => {
+    const response = await api.post('/admin/daily-expressions/delete-batch', { ids });
     return response.data;
   },
 };

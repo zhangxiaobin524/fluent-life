@@ -6,9 +6,10 @@ export interface User {
   phone?: string;
   avatar_url?: string;
   role?: string;
-  status: 'active' | 'inactive';
+  status: number; // 0-禁用, 1-正常
+  gender?: string | null; // 性别
   created_at: string;
-  last_login_at?: string;
+  last_login_at?: string | null; // 最近登录时间
 }
 
 // 帖子类型

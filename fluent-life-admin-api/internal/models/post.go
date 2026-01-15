@@ -44,6 +44,16 @@ type Comment struct {
 	User User `gorm:"foreignKey:UserID" json:"user,omitempty"`
 }
 
+type PostCollection struct {
+	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()" json:"id"`
+	PostID    uuid.UUID `gorm:"type:uuid;not null;uniqueIndex:idx_post_collections_post_user;index:idx_post_collections_post_id;constraint:OnDelete:CASCADE" json:"post_id"`
+	UserID    uuid.UUID `gorm:"type:uuid;not null;uniqueIndex:idx_post_collections_post_user;index:idx_post_collections_user_id" json:"user_id"`
+	CreatedAt time.Time `json:"created_at"`
+
+	Post Post `gorm:"foreignKey:PostID" json:"-"`
+	User User `gorm:"foreignKey:UserID" json:"-"`
+}
+
 func (p *Post) BeforeCreate(tx *gorm.DB) error {
 	if p.ID == uuid.Nil {
 		p.ID = uuid.New()
@@ -61,6 +71,13 @@ func (pl *PostLike) BeforeCreate(tx *gorm.DB) error {
 func (c *Comment) BeforeCreate(tx *gorm.DB) error {
 	if c.ID == uuid.Nil {
 		c.ID = uuid.New()
+	}
+	return nil
+}
+
+func (pc *PostCollection) BeforeCreate(tx *gorm.DB) error {
+	if pc.ID == uuid.Nil {
+		pc.ID = uuid.New()
 	}
 	return nil
 }

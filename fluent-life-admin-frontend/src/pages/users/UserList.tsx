@@ -5,8 +5,9 @@ import Card from '../../components/common/Card';
 import Table from '../../components/common/Table';
 import Button from '../../components/form/Button';
 import UserModal from './UserModal';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Edit, Trash2, BarChart } from 'lucide-react';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -104,18 +105,30 @@ const UserList: React.FC = () => {
       key: 'status',
       title: '状态',
       dataIndex: 'status' as keyof User,
-      render: (value: string) => (
+      render: (value: number) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium ${
-            value === 'active'
+            value === 1
               ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+              : 'bg-red-100 text-red-800'
           }`}
         >
-          {value === 'active' ? '活跃' : '非活跃'}
-        </span>
-      ),
-    },
+          {value === 1 ? '正常' : '禁用'}
+    </span>
+  ),
+},
+{
+  key: 'gender',
+  title: '性别',
+  dataIndex: 'gender' as keyof User,
+  render: (value: string | null) => value || '未知', // 如果没有性别信息，显示“未知”
+},
+{
+  key: 'last_login_time',
+  title: '最近登录时间',
+  dataIndex: 'last_login_at' as keyof User,
+  render: (value: string | null) => value ? format(new Date(value), 'yyyy-MM-dd HH:mm') : '未登录',
+},
     {
       key: 'created_at',
       title: '注册时间',
@@ -133,6 +146,13 @@ const UserList: React.FC = () => {
           >
             <Edit className="w-4 h-4" />
           </button>
+          <Link
+            to={`/users/${record.id}/training-records`}
+            className="text-green-600 hover:text-green-700"
+            title="查看训练记录"
+          >
+            <BarChart className="w-4 h-4" />
+          </Link>
           <button
             onClick={() => handleDelete(record.id)}
             className="text-red-600 hover:text-red-700"

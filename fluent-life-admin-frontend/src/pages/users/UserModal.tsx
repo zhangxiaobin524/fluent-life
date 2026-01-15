@@ -20,7 +20,7 @@ interface UserFormData {
   email?: string;
   phone?: string;
   role: string;
-  status: 'active' | 'inactive';
+  status: 0 | 1; // 0-禁用, 1-正常
 }
 
 const UserModal: React.FC<UserModalProps> = ({ visible, user, onClose }) => {
@@ -36,7 +36,7 @@ const UserModal: React.FC<UserModalProps> = ({ visible, user, onClose }) => {
       email: '',
       phone: '',
       role: 'user',
-      status: 'active',
+      status: 1, // 默认正常
     },
   });
 
@@ -47,7 +47,7 @@ const UserModal: React.FC<UserModalProps> = ({ visible, user, onClose }) => {
         email: user.email || '',
         phone: user.phone || '',
         role: user.role || 'user',
-        status: user.status,
+        status: user.status, // 假设 user.status 已经是 0 或 1
       });
     } else {
       reset({
@@ -55,7 +55,7 @@ const UserModal: React.FC<UserModalProps> = ({ visible, user, onClose }) => {
         email: '',
         phone: '',
         role: 'user',
-        status: 'active',
+        status: 1, // 默认正常
       });
     }
   }, [user, reset]);
@@ -124,10 +124,10 @@ const UserModal: React.FC<UserModalProps> = ({ visible, user, onClose }) => {
 
           <FormItem label="状态" required error={errors.status?.message}>
             <Select
-              {...register('status')}
+              {...register('status', { valueAsNumber: true })}
               options={[
-                { label: '活跃', value: 'active' },
-                { label: '非活跃', value: 'inactive' },
+                { label: '正常', value: 1 },
+                { label: '禁用', value: 0 },
               ]}
               error={!!errors.status}
             />
