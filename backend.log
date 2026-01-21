@@ -2943,3 +2943,187 @@ Please check https://github.com/gin-gonic/gin/blob/master/docs/doc.md#dont-trust
 {"level":"INFO","ts":"2026-01-21T12:31:08.399+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
 {"level":"INFO","ts":"2026-01-21T12:31:08.399+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.005353959,"ip":"::1"}
 2026-01-21 12:31:08.399531 +0800 CST m=+46077.515927584 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:57:24.342+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.349+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.350+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.010751458,"ip":"::1"}
+2026-01-21 12:57:24.350734 +0800 CST m=+47653.466047834 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:57:24.356+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.356+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.356+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.000178625,"ip":"::1"}
+2026-01-21 12:57:24.356826 +0800 CST m=+47653.472140042 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:57:24.360+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/exposure/modules/progress","status":204,"latency":0.000042625,"ip":"::1"}
+2026-01-21 12:57:24.360423 +0800 CST m=+47653.475737292 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:57:24.366+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.366+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.366+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.00026525,"ip":"::1"}
+2026-01-21 12:57:24.366779 +0800 CST m=+47653.482092751 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:57:24.373+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.373+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:57:24.373+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.000222125,"ip":"::1"}
+2026-01-21 12:57:24.373288 +0800 CST m=+47653.488601459 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=100","status":200,"latency":0.000576417,"ip":"::1"}
+{"level":"INFO","ts":"2026-01-21T12:58:01.610+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.000489167,"ip":"::1"}
+2026-01-21 12:58:01.610667 +0800 CST m=+47690.725956501 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+2026-01-21 12:58:01.610673 +0800 CST m=+47690.725962667 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.013+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/achievements","status":204,"latency":0.000054959,"ip":"::1"}
+2026-01-21 12:58:03.013408 +0800 CST m=+47692.128696792 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.017+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/training/records?page=1&page_size=10","status":204,"latency":0.000014667,"ip":"::1"}
+2026-01-21 12:58:03.017181 +0800 CST m=+47692.132469042 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.016+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.028+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.028+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.011647042,"ip":"::1"}
+2026-01-21 12:58:03.028467 +0800 CST m=+47692.143755834 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.018+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/training/records?page=1&page_size=10","status":204,"latency":0.000923625,"ip":"::1"}
+2026-01-21 12:58:03.01834 +0800 CST m=+47692.133628584 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.017+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/achievements","status":204,"latency":0.000034375,"ip":"::1"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.021+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/achievements"}
+2026-01-21 12:58:03.017278 +0800 CST m=+47692.132566584 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.029+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.039+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.044+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.051+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/achievements","status":200,"latency":0.029613,"ip":"::1"}
+2026-01-21 12:58:03.051226 +0800 CST m=+47692.166514001 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.044+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.052+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page=1&page_size=10","status":200,"latency":0.022233166,"ip":"::1"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.050+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+2026-01-21 12:58:03.052122 +0800 CST m=+47692.167410126 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.056+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.016102458,"ip":"::1"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.057+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/achievements"}
+2026-01-21 12:58:03.056059 +0800 CST m=+47692.171347334 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:03.060+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.060+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/achievements","status":200,"latency":0.002714959,"ip":"::1"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.060+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.064+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 无效的认证令牌: token has invalid claims: token is expired"}
+{"level":"INFO","ts":"2026-01-21T12:58:03.064+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page=1&page_size=10","status":200,"latency":0.003426459,"ip":"::1"}
+2026-01-21 12:58:03.06048 +0800 CST m=+47692.175768251 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+2026-01-21 12:58:03.064105 +0800 CST m=+47692.179393751 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:04.586+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: POST /api/v1/auth/logout"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.586+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 未提供认证令牌"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.587+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"POST","path":"/api/v1/auth/logout","status":200,"latency":0.00148175,"ip":"::1"}
+2026-01-21 12:58:04.58782 +0800 CST m=+47693.703107542 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:04.652+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/ai/summary"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.652+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 未提供认证令牌"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.652+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/ai/summary","status":200,"latency":0.000186041,"ip":"::1"}
+2026-01-21 12:58:04.652997 +0800 CST m=+47693.768284667 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:04.658+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/ai/summary"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.659+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 未提供认证令牌"}
+{"level":"INFO","ts":"2026-01-21T12:58:04.659+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/ai/summary","status":200,"latency":0.000539542,"ip":"::1"}
+2026-01-21 12:58:04.659241 +0800 CST m=+47693.774528792 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:06.793+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/auth/login","status":204,"latency":0.000016792,"ip":"::1"}
+2026-01-21 12:58:06.793248 +0800 CST m=+47695.908533459 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:07.022+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"POST","path":"/api/v1/auth/login","status":200,"latency":0.2219815,"ip":"::1"}
+2026-01-21 12:58:07.022538 +0800 CST m=+47696.137823459 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:07.048+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T12:58:07.048+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:07.141+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.09349225,"ip":"::1"}
+2026-01-21 12:58:07.141622 +0800 CST m=+47696.256907209 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:08.517+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.517+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.532+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.015335625,"ip":"::1"}
+2026-01-21 12:58:08.532667 +0800 CST m=+47697.647951417 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:08.538+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.538+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.543+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.543+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.546+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.008211958,"ip":"::1"}
+2026-01-21 12:58:08.546682 +0800 CST m=+47697.661966917 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:08.587+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.044129959,"ip":"::1"}
+2026-01-21 12:58:08.587756 +0800 CST m=+47697.703040459 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:08.597+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.597+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:08.635+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.038198083,"ip":"::1"}
+2026-01-21 12:58:08.63572 +0800 CST m=+47697.751004334 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:10.162+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.163+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.163+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.164+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.176+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.013538459,"ip":"::1"}
+2026-01-21 12:58:10.176675 +0800 CST m=+47699.291959126 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:10.192+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/training/records?page_size=1","status":204,"latency":0.000007083,"ip":"::1"}
+2026-01-21 12:58:10.192058 +0800 CST m=+47699.307341376 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:10.197+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.197+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.215+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=100","status":200,"latency":0.052906584,"ip":"::1"}
+2026-01-21 12:58:10.215468 +0800 CST m=+47699.330751292 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:10.217+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=1","status":200,"latency":0.020459708,"ip":"::1"}
+2026-01-21 12:58:10.21764 +0800 CST m=+47699.332923876 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:10.237+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.238+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:10.258+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=100","status":200,"latency":0.02114125,"ip":"::1"}
+2026-01-21 12:58:10.258981 +0800 CST m=+47699.374265126 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:12.735+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.736+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.752+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.016556709,"ip":"::1"}
+2026-01-21 12:58:12.752371 +0800 CST m=+47701.867652876 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:12.758+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.758+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.763+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.768+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.771+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.013242125,"ip":"::1"}
+2026-01-21 12:58:12.771581 +0800 CST m=+47701.886862667 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:12.793+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.029559916,"ip":"::1"}
+2026-01-21 12:58:12.79308 +0800 CST m=+47701.908361876 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T12:58:12.797+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/exposure/modules/progress"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.797+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T12:58:12.825+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/exposure/modules/progress","status":200,"latency":0.028209625,"ip":"::1"}
+2026-01-21 12:58:12.82589 +0800 CST m=+47701.941172376 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:52.431+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.433+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.433+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/stats"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.436+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.474+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/stats","status":200,"latency":0.041100542,"ip":"::1"}
+2026-01-21 13:00:52.474839 +0800 CST m=+47861.590013626 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:52.481+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.483+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:52.492+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=100","status":200,"latency":0.061251959,"ip":"::1"}
+2026-01-21 13:00:52.492364 +0800 CST m=+47861.607538376 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:52.514+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page_size=1","status":200,"latency":0.033564333,"ip":"::1"}
+2026-01-21 13:00:52.514878 +0800 CST m=+47861.630052167 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.592+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.593+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.592+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.593+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.594+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/achievements"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.596+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.622+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page=1&page_size=10","status":200,"latency":0.030600833,"ip":"::1"}
+2026-01-21 13:00:53.622825 +0800 CST m=+47862.737998167 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.628+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/training/records"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.630+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.671+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/achievements","status":200,"latency":0.077024666,"ip":"::1"}
+2026-01-21 13:00:53.671827 +0800 CST m=+47862.787000709 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.685+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/training/records?page=1&page_size=10","status":200,"latency":0.05626275,"ip":"::1"}
+2026-01-21 13:00:53.68512 +0800 CST m=+47862.800293209 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.685+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/achievements"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.693+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.729+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/achievements","status":200,"latency":0.044205833,"ip":"::1"}
+2026-01-21 13:00:53.729438 +0800 CST m=+47862.844611292 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.745+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.153229542,"ip":"::1"}
+2026-01-21 13:00:53.745558 +0800 CST m=+47862.860731459 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:53.752+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.752+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:53.834+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.082519833,"ip":"::1"}
+2026-01-21 13:00:53.834644 +0800 CST m=+47862.949816876 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:54.717+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"OPTIONS","path":"/api/v1/auth/logout","status":204,"latency":0.000011208,"ip":"::1"}
+2026-01-21 13:00:54.717843 +0800 CST m=+47863.833015584 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:54.729+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: POST /api/v1/auth/logout"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.730+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.745+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"POST","path":"/api/v1/auth/logout","status":200,"latency":0.0160835,"ip":"::1"}
+2026-01-21 13:00:54.745402 +0800 CST m=+47863.860574959 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:54.801+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/ai/summary"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.802+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 未提供认证令牌"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.802+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/ai/summary","status":200,"latency":0.000207709,"ip":"::1"}
+2026-01-21 13:00:54.802086 +0800 CST m=+47863.917259126 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:54.809+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/ai/summary"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.809+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ❌ 未提供认证令牌"}
+{"level":"INFO","ts":"2026-01-21T13:00:54.809+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/ai/summary","status":200,"latency":0.000170375,"ip":"::1"}
+2026-01-21 13:00:54.809608 +0800 CST m=+47863.924780251 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:57.210+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"POST","path":"/api/v1/auth/login","status":200,"latency":0.094099375,"ip":"::1"}
+2026-01-21 13:00:57.210713 +0800 CST m=+47866.325884417 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
+{"level":"INFO","ts":"2026-01-21T13:00:57.235+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] 收到请求: GET /api/v1/users/profile"}
+{"level":"INFO","ts":"2026-01-21T13:00:57.235+0800","caller":"utils/logger.go:142","msg":"[Auth Middleware] ✅ 认证成功，用户ID: 1b7b6081-9139-4e57-b16e-7f0885ae5e43"}
+{"level":"INFO","ts":"2026-01-21T13:00:57.299+0800","caller":"middleware/logger.go:39","msg":"HTTP Request","method":"GET","path":"/api/v1/users/profile","status":200,"latency":0.0646185,"ip":"::1"}
+2026-01-21 13:00:57.299637 +0800 CST m=+47866.414808001 write error: write /Users/zhangxiaobin/self-project/fluent-life-api/logs/api-2026-01-20.log: file already closed
