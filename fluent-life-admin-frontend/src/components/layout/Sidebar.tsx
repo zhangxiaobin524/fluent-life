@@ -23,6 +23,7 @@ import {
   Cog as SystemGroup,
   Video,
   List,
+  Wrench,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useMenuContext } from '../../contexts/MenuContext';
@@ -59,6 +60,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   SystemGroup,
   Video,
   List,
+  Wrench,
   Dashboard: LayoutDashboard,
   // 默认图标
   default: FileText,
@@ -85,14 +87,64 @@ const defaultMenuItems: MenuItem[] = [
     path: '/users',
   },
   {
-    key: 'videos',
-    label: '视频管理',
-    icon: FileText,
-    path: '/videos',
+    key: 'correction',
+    label: '矫正中心',
+    icon: BarChart3,
+    group: true,
+    children: [
+      {
+        key: 'correction-center',
+        label: '训练统计',
+        icon: BarChart3,
+        path: '/correction-center',
+      },
+      {
+        key: 'videos',
+        label: '视频管理',
+        icon: FileText,
+        path: '/videos',
+      },
+      {
+        key: 'ai-roles',
+        label: 'AI模拟角色',
+        icon: Users,
+        path: '/ai-roles',
+      },
+      {
+        key: 'voice-types',
+        label: '音色管理',
+        icon: Settings,
+        path: '/voice-types',
+      },
+      {
+        key: 'exposure-modules',
+        label: '脱敏练习场景',
+        icon: FileText,
+        path: '/exposure-modules',
+      },
+      {
+        key: 'tongue-twisters',
+        label: '绕口令管理',
+        icon: MessageSquare,
+        path: '/tongue-twisters',
+      },
+      {
+        key: 'daily-expressions',
+        label: '每日朗诵文案',
+        icon: BookOpen,
+        path: '/daily-expressions',
+      },
+      {
+        key: 'speech-techniques',
+        label: '语音技巧训练',
+        icon: MessageSquare,
+        path: '/speech-techniques',
+      },
+    ],
   },
   {
     key: 'community',
-    label: '社区管理',
+    label: '感悟广场',
     icon: CommunityGroup,
     group: true,
     children: [
@@ -123,63 +175,31 @@ const defaultMenuItems: MenuItem[] = [
     ],
   },
   {
-    key: 'training',
-    label: '训练管理',
-    icon: TrainingGroup,
+    key: 'rooms',
+    label: '语音练习',
+    icon: Home,
     group: true,
     children: [
       {
-        key: 'training-stats',
-        label: '训练统计',
-        icon: BarChart3,
+        key: 'rooms-management',
+        label: '房间列表',
+        icon: Home,
         path: '/training',
       },
       {
-        key: 'rooms',
-        label: '房间管理',
-        icon: Home,
-        path: '/rooms',
-      },
-    ],
-  },
-  {
-    key: 'exposure',
-    label: '脱敏练习',
-    icon: Users,
-    group: true,
-    children: [
-      {
-        key: 'exposure-modules',
-        label: '脱敏练习场景管理',
-        icon: FileText,
-        path: '/exposure-modules',
+        key: 'random-match',
+        label: '随机匹配',
+        icon: Users,
+        path: '/random-match',
       },
     ],
   },
   {
     key: 'content',
-    label: '内容管理',
+    label: '设置管理',
     icon: ContentGroup,
     group: true,
     children: [
-      {
-        key: 'tongue-twisters',
-        label: '绕口令管理',
-        icon: MessageSquare,
-        path: '/tongue-twisters',
-      },
-      {
-        key: 'daily-expressions',
-        label: '每日朗诵文案',
-        icon: BookOpen,
-        path: '/daily-expressions',
-      },
-      {
-        key: 'speech-techniques',
-        label: '语音技巧训练',
-        icon: MessageSquare,
-        path: '/speech-techniques',
-      },
       {
         key: 'legal-documents',
         label: '法律文档',
@@ -203,26 +223,6 @@ const defaultMenuItems: MenuItem[] = [
         label: '帮助文章',
         icon: MessageSquare,
         path: '/help-articles',
-      },
-    ],
-  },
-  {
-    key: 'ai',
-    label: 'AI管理',
-    icon: MessageSquare,
-    group: true,
-    children: [
-      {
-        key: 'ai-roles',
-        label: 'AI模拟角色管理',
-        icon: Users,
-        path: '/ai-roles',
-      },
-      {
-        key: 'voice-types',
-        label: '音色管理',
-        icon: Settings,
-        path: '/voice-types',
       },
     ],
   },
@@ -283,7 +283,7 @@ const convertMenuToMenuItem = (menu: Menu): MenuItem | null => {
 const Sidebar: React.FC<SidebarProps> = ({ collapsed = false }) => {
   const location = useLocation();
   const { menus: apiMenus, loading } = useMenuContext();
-  const [expandedGroups, setExpandedGroups] = useState<string[]>(['community', 'training', 'content', 'ai', 'system']);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(['correction', 'community', 'training', 'content', 'system']);
 
   // 将后端菜单转换为侧边栏菜单项
   // 暂时强制使用默认菜单，确保所有功能正常访问

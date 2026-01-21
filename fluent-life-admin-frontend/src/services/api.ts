@@ -43,7 +43,7 @@ export const adminAPI = {
   },
 
   // 帖子管理
-  getPosts: async (params: { page?: number; page_size?: number; keyword?: string }) => {
+  getPosts: async (params: { page?: number; page_size?: number; keyword?: string; user_id?: string }) => {
     const response = await api.get('/admin/posts', { params });
     return response.data;
   },
@@ -57,7 +57,7 @@ export const adminAPI = {
   },
 
   // 房间管理
-  getRooms: async (params: { page?: number; page_size?: number; keyword?: string; is_active?: string }) => {
+  getRooms: async (params: { page?: number; page_size?: number; keyword?: string; is_active?: string; type?: string }) => {
     const response = await api.get('/admin/rooms', { params });
     return response.data;
   },
@@ -73,6 +73,16 @@ export const adminAPI = {
     const response = await api.post('/admin/rooms/delete-batch', { ids });
     return response.data;
   },
+  getRoomMembers: async (roomId: string) => {
+    const response = await api.get(`/admin/rooms/${roomId}/members`);
+    return response.data;
+  },
+
+  // 随机匹配管理
+  getRandomMatchRecords: async (params: { page?: number; page_size?: number; status?: string; keyword?: string; user_id?: string }) => {
+    const response = await api.get('/admin/random-match', { params });
+    return response.data;
+  },
   toggleRoom: async (id: string) => {
     const response = await api.patch(`/admin/rooms/${id}/toggle`);
     return response.data;
@@ -83,8 +93,30 @@ export const adminAPI = {
     const response = await api.get('/admin/training/stats');
     return response.data;
   },
+  // 管理员查看指定用户勋章
+  getUserBadges: async (userId: string) => {
+    const response = await api.get(`/admin/users/${userId}/badges`);
+    return response.data;
+  },
+  // 数据概览（后台首页）
+  getDetailedStats: async () => {
+    const response = await api.get('/admin/detailed-stats');
+    return response.data;
+  },
   getTrainingRecords: async (params: { page?: number; page_size?: number; type?: string; user_id?: string }) => {
     const response = await api.get('/admin/training/records', { params });
+    return response.data;
+  },
+  getTrainingRecord: async (id: string) => {
+    const response = await api.get(`/admin/training/records/${id}`);
+    return response.data;
+  },
+  updateTrainingRecord: async (id: string, data: any) => {
+    const response = await api.put(`/admin/training/records/${id}`, data);
+    return response.data;
+  },
+  deleteTrainingRecordsBatch: async (ids: string[]) => {
+    const response = await api.post('/admin/training/records/delete-batch', { ids });
     return response.data;
   },
 

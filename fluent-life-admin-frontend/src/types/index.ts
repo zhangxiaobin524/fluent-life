@@ -1,3 +1,13 @@
+// 用户成就类型
+export interface UserAchievement {
+  id: string;
+  achievement_type: string;
+  title: string;
+  icon: string;
+  desc: string;
+  unlocked_at: string;
+}
+
 // 用户类型
 export interface User {
   id: string;
@@ -10,6 +20,9 @@ export interface User {
   gender?: string | null; // 性别
   created_at: string;
   last_login_at?: string | null; // 最近登录时间
+  is_online?: boolean; // 是否在线
+  last_active_at?: string | null; // 最后活跃时间
+  achievements?: UserAchievement[]; // 用户获得的勋章
 }
 
 // 帖子类型
@@ -31,11 +44,21 @@ export interface Room {
   title: string;
   theme: string;
   type: string;
+  description?: string;
   max_members: number;
   current_members: number;
   is_active: boolean;
   created_at: string;
+  updated_at?: string;
   user?: User;
+  members?: Array<{
+    id: string;
+    user_id: string;
+    room_id: string;
+    is_host: boolean;
+    joined_at: string;
+    user?: User;
+  }>;
 }
 
 // 训练记录类型
@@ -48,6 +71,8 @@ export interface TrainingRecord {
   timestamp: string;
   created_at: string;
   user?: User;
+  // 后端兜底字段：当 user 关联未返回时，仍可直接展示
+  username?: string;
 }
 
 // 角色类型

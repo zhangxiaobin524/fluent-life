@@ -29,6 +29,7 @@ func AutoMigrate(db *gorm.DB) error {
 		&VoiceType{},
 		&Role{},
 		&Menu{},
+		&RandomMatchRecord{},
 	)
 }
 

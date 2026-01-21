@@ -1,0 +1,37 @@
+version: "3.9"
+
+name: fluent-life-admin
+
+services:
+  admin-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fluent-life-admin-api
+    ports:
+      - "8082:8082"
+    environment:
+      # 若你的後端需要讀取 PORT，保留這個
+      PORT: "8082"
+    restart: unless-stopped
+
+  admin-frontend:
+    build:
+      # admin-frontend 與本目錄同層
+      context: ../fluent-life-admin-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_ADMIN_API_BASE_URL:-http://localhost:8082}
+    container_name: fluent-life-admin-frontend
+    depends_on:
+      - admin-api
+    ports:
+      - "5172:5172"
+    environment:
+      VITE_API_BASE_URL: ${VITE_ADMIN_API_BASE_URL:-http://localhost:8082}
+    restart: unless-stopped
+
+networks:
+  default:
+    name: fluent-life-admin-net
+

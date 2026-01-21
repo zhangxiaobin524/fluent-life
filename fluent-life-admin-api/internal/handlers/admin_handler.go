@@ -32,16 +32,66 @@ func (h *AdminHandler) logOperation(c *gin.Context, action, resource, resourceID
 	userRole, _ := c.Get("userRole")
 
 	logEntry := models.OperationLog{
-		UserID:    userID.(uuid.UUID),
-		Username:  username.(string),
-		UserRole:  userRole.(string),
-		Action:    action,
-		Resource:  resource,
+		UserID:     userID.(uuid.UUID),
+		Username:   username.(string),
+		UserRole:   userRole.(string),
+		Action:     action,
+		Resource:   resource,
 		ResourceID: resourceID,
-		Details:   details,
-		Status:    status,
+		Details:    details,
+		Status:     status,
 	}
 	h.db.Create(&logEntry) // Log asynchronously, errors here should not block main operation
+}
+
+// GetRandomMatchRecords 获取 1v1 随机匹配记录
+func (h *AdminHandler) GetRandomMatchRecords(c *gin.Context) {
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "20"))
+	status := c.Query("status")
+	keyword := c.Query("keyword")
+
+	if page < 1 {
+		page = 1
+	}
+	if pageSize < 1 {
+		pageSize = 20
+	}
+
+	query := h.db.Model(&models.RandomMatchRecord{}).Preload("User").Preload("MatchedUser")
+
+	// 按用户ID筛选
+	if userID := c.Query("user_id"); userID != "" {
+		query = query.Where("user_id = ?", userID)
+	}
+
+	if status != "" {
+		query = query.Where("status = ?", status)
+	}
+	if keyword != "" {
+		kw := "%" + strings.ToLower(keyword) + "%"
+		query = query.Joins("LEFT JOIN users u ON u.id = random_match_records.user_id").
+			Where("LOWER(u.username) LIKE ?", kw)
+	}
+
+	var total int64
+	if err := query.Count(&total).Error; err != nil {
+		response.Error(c, http.StatusInternalServerError, "统计匹配记录失败")
+		return
+	}
+
+	var records []models.RandomMatchRecord
+	if err := query.Order("created_at DESC").Offset((page - 1) * pageSize).Limit(pageSize).Find(&records).Error; err != nil {
+		response.Error(c, http.StatusInternalServerError, "获取匹配记录失败")
+		return
+	}
+
+	response.Success(c, gin.H{
+		"records":   records,
+		"total":     total,
+		"page":      page,
+		"page_size": pageSize,
+	}, "获取成功")
 }
 
 // isValidRole 检查角色是否有效
@@ -246,24 +296,24 @@ func (h *AdminHandler) GetUsers(c *gin.Context) {
 	var total int64
 
 	query := h.db.Model(&models.User{})
-	
+
 	// 搜索
 	if keyword := c.Query("keyword"); keyword != "" {
-		query = query.Where("username LIKE ? OR email LIKE ? OR phone LIKE ?", 
+		query = query.Where("username LIKE ? OR email LIKE ? OR phone LIKE ?",
 			"%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%")
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("created_at DESC").Find(&users).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
 
 	response.Success(c, gin.H{
-		"users": users,
-		"total": total,
-		"page": page,
+		"users":     users,
+		"total":     total,
+		"page":      page,
 		"page_size": pageSize,
 	}, "获取成功")
 }
@@ -271,7 +321,7 @@ func (h *AdminHandler) GetUsers(c *gin.Context) {
 // 获取用户详情
 func (h *AdminHandler) GetUser(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var user models.User
 	if err := h.db.Where("id = ?", id).First(&user).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "用户不存在")
@@ -284,7 +334,7 @@ func (h *AdminHandler) GetUser(c *gin.Context) {
 // 删除用户
 func (h *AdminHandler) DeleteUser(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	if err := h.db.Where("id = ?", id).Delete(&models.User{}).Error; err != nil {
 		h.logOperation(c, "DeleteUser", "User", id, "删除用户失败: "+err.Error(), "Failure")
 		response.Error(c, http.StatusInternalServerError, "删除失败")
@@ -312,10 +362,10 @@ func (h *AdminHandler) CreatePost(c *gin.Context) {
 		response.Error(c, http.StatusUnauthorized, "用户ID未找到")
 		return
 	}
-	
+
 	// 打印用户ID以验证取值
 	log.Printf("从上下文获取的userID: %v, 类型: %T", userID, userID)
-	
+
 	post := models.Post{
 		UserID:  userID.(uuid.UUID),
 		Content: req.Content,
@@ -387,23 +437,28 @@ func (h *AdminHandler) GetPosts(c *gin.Context) {
 	var total int64
 
 	query := h.db.Model(&models.Post{}).Preload("User")
-	
+
+	// 按用户ID筛选
+	if userID := c.Query("user_id"); userID != "" {
+		query = query.Where("user_id = ?", userID)
+	}
+
 	// 搜索
 	if keyword := c.Query("keyword"); keyword != "" {
 		query = query.Where("content LIKE ?", "%"+keyword+"%")
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("created_at DESC").Find(&posts).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
 
 	response.Success(c, gin.H{
-		"posts": posts,
-		"total": total,
-		"page": page,
+		"posts":     posts,
+		"total":     total,
+		"page":      page,
 		"page_size": pageSize,
 	}, "获取成功")
 }
@@ -411,7 +466,7 @@ func (h *AdminHandler) GetPosts(c *gin.Context) {
 // 获取帖子详情
 func (h *AdminHandler) GetPost(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var post models.Post
 	if err := h.db.Preload("User").Preload("Comments.User").Where("id = ?", id).First(&post).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "帖子不存在")
@@ -482,10 +537,15 @@ func (h *AdminHandler) GetRooms(c *gin.Context) {
 	var total int64
 
 	query := h.db.Model(&models.PracticeRoom{}).Preload("User")
-	
+
 	// 搜索
 	if keyword := c.Query("keyword"); keyword != "" {
 		query = query.Where("title LIKE ? OR theme LIKE ?", "%"+keyword+"%", "%"+keyword+"%")
+	}
+
+	// 筛选房间类型
+	if roomType := c.Query("type"); roomType != "" {
+		query = query.Where("type = ?", roomType)
 	}
 
 	// 筛选活跃状态
@@ -495,16 +555,16 @@ func (h *AdminHandler) GetRooms(c *gin.Context) {
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("created_at DESC").Find(&rooms).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
 
 	response.Success(c, gin.H{
-		"rooms": rooms,
-		"total": total,
-		"page": page,
+		"rooms":     rooms,
+		"total":     total,
+		"page":      page,
 		"page_size": pageSize,
 	}, "获取成功")
 }
@@ -512,7 +572,7 @@ func (h *AdminHandler) GetRooms(c *gin.Context) {
 // 获取房间详情
 func (h *AdminHandler) GetRoom(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var room models.PracticeRoom
 	if err := h.db.Preload("User").Preload("Members.User").Where("id = ?", id).First(&room).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "房间不存在")
@@ -562,7 +622,7 @@ func (h *AdminHandler) DeleteRoom(c *gin.Context) {
 // 关闭/开启房间
 func (h *AdminHandler) ToggleRoom(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var room models.PracticeRoom
 	if err := h.db.Where("id = ?", id).First(&room).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "房间不存在")
@@ -605,14 +665,14 @@ func (h *AdminHandler) CreateRoom(c *gin.Context) {
 	log.Printf("从上下文获取的userID: %v, 类型: %T", userID, userID)
 
 	room := models.PracticeRoom{
-		UserID:      userID.(uuid.UUID),
-		Title:       req.Title,
-		Theme:       req.Theme,
-		Type:        req.Type,
-		Description: req.Description,
-		MaxMembers:  req.MaxMembers,
-		IsActive:    true, // 默认创建时是活跃状态
-		CurrentMembers: 1, // 创建者默认为第一个成员
+		UserID:         userID.(uuid.UUID),
+		Title:          req.Title,
+		Theme:          req.Theme,
+		Type:           req.Type,
+		Description:    req.Description,
+		MaxMembers:     req.MaxMembers,
+		IsActive:       true, // 默认创建时是活跃状态
+		CurrentMembers: 1,    // 创建者默认为第一个成员
 	}
 
 	if err := h.db.Create(&room).Error; err != nil {
@@ -854,9 +914,9 @@ func (h *AdminHandler) GetMeditationProgresses(c *gin.Context) {
 
 	response.Success(c, gin.H{
 		"progresses": progresses,
-		"total":        total,
-		"page":         page,
-		"page_size":    pageSize,
+		"total":      total,
+		"page":       page,
+		"page_size":  pageSize,
 	}, "获取成功")
 }
 
@@ -1098,8 +1158,9 @@ func (h *AdminHandler) GetTrainingRecords(c *gin.Context) {
 	var records []models.TrainingRecord
 	var total int64
 
+	// 使用 Preload 预加载用户信息，确保关联数据正确加载
 	query := h.db.Model(&models.TrainingRecord{}).Preload("User")
-	
+
 	// 按类型筛选
 	if recordType := c.Query("type"); recordType != "" {
 		query = query.Where("type = ?", recordType)
@@ -1119,16 +1180,54 @@ func (h *AdminHandler) GetTrainingRecords(c *gin.Context) {
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("created_at DESC").Find(&records).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
 
+	// 确保用户信息被正确加载：遍历所有记录，强制手动加载用户信息
+	// 因为 Preload 可能在某些情况下不工作，所以强制手动加载
+	for i := range records {
+		var user models.User
+		if err := h.db.Where("id = ?", records[i].UserID).First(&user).Error; err == nil {
+			// 成功加载用户信息，覆盖 Preload 的结果
+			records[i].User = user
+			log.Printf("[训练记录] 用户ID: %s, 用户名: %s", records[i].UserID.String(), user.Username)
+		} else {
+			// 如果用户不存在（可能已删除），设置为"已注销用户"
+			log.Printf("[训练记录] 用户ID: %s, 用户不存在: %v", records[i].UserID.String(), err)
+			records[i].User = models.User{
+				ID:       records[i].UserID,
+				Username: "已注销用户",
+			}
+		}
+	}
+
+	// 返回一个更前端友好的结构：额外扁平化 username，避免 user 关联未加载时前端无法展示
+	type trainingRecordDTO struct {
+		models.TrainingRecord
+		Username string `json:"username"`
+	}
+	dtos := make([]trainingRecordDTO, 0, len(records))
+	for _, r := range records {
+		username := ""
+		if r.User.Username != "" {
+			username = r.User.Username
+		} else {
+			// 兜底：即使 user 未序列化/未加载，也能显示
+			username = "未知用户"
+		}
+		dtos = append(dtos, trainingRecordDTO{
+			TrainingRecord: r,
+			Username:       username,
+		})
+	}
+
 	response.Success(c, gin.H{
-		"records": records,
-		"total": total,
-		"page": page,
+		"records":   dtos,
+		"total":     total,
+		"page":      page,
 		"page_size": pageSize,
 	}, "获取成功")
 }
@@ -1136,7 +1235,7 @@ func (h *AdminHandler) GetTrainingRecords(c *gin.Context) {
 // 获取训练记录详情
 func (h *AdminHandler) GetTrainingRecord(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var record models.TrainingRecord
 	if err := h.db.Preload("User").Where("id = ?", id).First(&record).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "训练记录不存在")
@@ -1587,34 +1686,34 @@ func (h *AdminHandler) GetDetailedStats(c *gin.Context) {
 	var stats struct {
 		// 用户统计
 		TotalUsers        int64 `json:"total_users"`
-		ActiveUsers       int64 `json:"active_users"`       // 最近7天活跃用户
-		NewUsersToday     int64 `json:"new_users_today"`    // 今日新增用户
-		NewUsersThisWeek  int64 `json:"new_users_this_week"` // 本周新增用户
+		ActiveUsers       int64 `json:"active_users"`         // 最近7天活跃用户
+		NewUsersToday     int64 `json:"new_users_today"`      // 今日新增用户
+		NewUsersThisWeek  int64 `json:"new_users_this_week"`  // 本周新增用户
 		NewUsersThisMonth int64 `json:"new_users_this_month"` // 本月新增用户
 
 		// 训练统计
-		TotalRecords      int64 `json:"total_records"`
-		MeditationCount   int64 `json:"meditation_count"`
-		AirflowCount      int64 `json:"airflow_count"`
-		ExposureCount     int64 `json:"exposure_count"`
-		PracticeCount     int64 `json:"practice_count"`
-		TotalDuration     int64 `json:"total_duration"`     // 总训练时长（分钟）
-		AvgDuration       int64 `json:"avg_duration"`       // 平均训练时长（分钟）
+		TotalRecords    int64 `json:"total_records"`
+		MeditationCount int64 `json:"meditation_count"`
+		AirflowCount    int64 `json:"airflow_count"`
+		ExposureCount   int64 `json:"exposure_count"`
+		PracticeCount   int64 `json:"practice_count"`
+		TotalDuration   int64 `json:"total_duration"` // 总训练时长（分钟）
+		AvgDuration     int64 `json:"avg_duration"`   // 平均训练时长（分钟）
 
 		// 社区统计
-		TotalPosts        int64 `json:"total_posts"`
-		TotalComments     int64 `json:"total_comments"`
-		TotalLikes        int64 `json:"total_likes"`
-		TotalCollections  int64 `json:"total_collections"`
-		TotalFollows      int64 `json:"total_follows"`
-		TotalRooms        int64 `json:"total_rooms"`
-		ActiveRooms       int64 `json:"active_rooms"`
+		TotalPosts       int64 `json:"total_posts"`
+		TotalComments    int64 `json:"total_comments"`
+		TotalLikes       int64 `json:"total_likes"`
+		TotalCollections int64 `json:"total_collections"`
+		TotalFollows     int64 `json:"total_follows"`
+		TotalRooms       int64 `json:"total_rooms"`
+		ActiveRooms      int64 `json:"active_rooms"`
 
 		// AI功能统计
 		TotalAIConversations int64 `json:"total_ai_conversations"`
 
 		// 内容统计
-		TotalTongueTwisters int64 `json:"total_tongue_twisters"`
+		TotalTongueTwisters   int64 `json:"total_tongue_twisters"`
 		TotalDailyExpressions int64 `json:"total_daily_expressions"`
 	}
 
@@ -1622,13 +1721,13 @@ func (h *AdminHandler) GetDetailedStats(c *gin.Context) {
 	h.db.Model(&models.User{}).Count(&stats.TotalUsers)
 	sevenDaysAgo := time.Now().AddDate(0, 0, -7)
 	h.db.Model(&models.User{}).Where("created_at >= ?", sevenDaysAgo).Count(&stats.ActiveUsers)
-	
+
 	today := time.Now().Format("2006-01-02")
 	h.db.Model(&models.User{}).Where("DATE(created_at) = ?", today).Count(&stats.NewUsersToday)
-	
+
 	weekStart := time.Now().AddDate(0, 0, -int(time.Now().Weekday()))
 	h.db.Model(&models.User{}).Where("created_at >= ?", weekStart).Count(&stats.NewUsersThisWeek)
-	
+
 	monthStart := time.Now().AddDate(0, 0, -time.Now().Day())
 	h.db.Model(&models.User{}).Where("created_at >= ?", monthStart).Count(&stats.NewUsersThisMonth)
 
@@ -1638,7 +1737,7 @@ func (h *AdminHandler) GetDetailedStats(c *gin.Context) {
 	h.db.Model(&models.TrainingRecord{}).Where("type = ?", "airflow").Count(&stats.AirflowCount)
 	h.db.Model(&models.TrainingRecord{}).Where("type = ?", "exposure").Count(&stats.ExposureCount)
 	h.db.Model(&models.TrainingRecord{}).Where("type = ?", "practice").Count(&stats.PracticeCount)
-	
+
 	var durationResult struct {
 		Total int64
 		Avg   float64
@@ -1678,7 +1777,7 @@ func (h *AdminHandler) GetTongueTwisters(c *gin.Context) {
 	var total int64
 
 	query := h.db.Model(&models.TongueTwister{})
-	
+
 	// 搜索
 	if keyword := c.Query("keyword"); keyword != "" {
 		query = query.Where("title LIKE ? OR content LIKE ?", "%"+keyword+"%", "%"+keyword+"%")
@@ -1696,7 +1795,7 @@ func (h *AdminHandler) GetTongueTwisters(c *gin.Context) {
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("level ASC, \"order\" ASC, created_at DESC").Find(&tongueTwisters).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
@@ -1713,7 +1812,7 @@ func (h *AdminHandler) GetTongueTwisters(c *gin.Context) {
 // 获取绕口令详情
 func (h *AdminHandler) GetTongueTwister(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var tongueTwister models.TongueTwister
 	if err := h.db.Where("id = ?", id).First(&tongueTwister).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "绕口令不存在")
@@ -1773,7 +1872,7 @@ func (h *AdminHandler) BatchCreateTongueTwisters(c *gin.Context) {
 // 更新绕口令
 func (h *AdminHandler) UpdateTongueTwister(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var tongueTwister models.TongueTwister
 	if err := h.db.Where("id = ?", id).First(&tongueTwister).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "绕口令不存在")
@@ -1864,7 +1963,7 @@ func (h *AdminHandler) CleanTongueTwisters(c *gin.Context) {
 
 	tx.Commit()
 	response.Success(c, gin.H{
-		"deleted_blank_count": deleteBlankResult.RowsAffected,
+		"deleted_blank_count":     deleteBlankResult.RowsAffected,
 		"deleted_duplicate_count": len(duplicateTwisters),
 	}, "绕口令清理成功")
 }
@@ -1881,10 +1980,10 @@ func (h *AdminHandler) GetDailyExpressions(c *gin.Context) {
 	var total int64
 
 	query := h.db.Model(&models.DailyExpression{})
-	
+
 	// 搜索
 	if keyword := c.Query("keyword"); keyword != "" {
-		query = query.Where("title LIKE ? OR content LIKE ? OR source LIKE ?", 
+		query = query.Where("title LIKE ? OR content LIKE ? OR source LIKE ?",
 			"%"+keyword+"%", "%"+keyword+"%", "%"+keyword+"%")
 	}
 
@@ -1895,7 +1994,7 @@ func (h *AdminHandler) GetDailyExpressions(c *gin.Context) {
 	}
 
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("date DESC, created_at DESC").Find(&expressions).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
@@ -1912,7 +2011,7 @@ func (h *AdminHandler) GetDailyExpressions(c *gin.Context) {
 // 获取每日朗诵文案详情
 func (h *AdminHandler) GetDailyExpression(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var expression models.DailyExpression
 	if err := h.db.Where("id = ?", id).First(&expression).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "文案不存在")
@@ -1940,7 +2039,7 @@ func (h *AdminHandler) CreateDailyExpression(c *gin.Context) {
 // 更新每日朗诵文案
 func (h *AdminHandler) UpdateDailyExpression(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var expression models.DailyExpression
 	if err := h.db.Where("id = ?", id).First(&expression).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "文案不存在")
@@ -2049,7 +2148,7 @@ func (h *AdminHandler) GetSpeechTechniques(c *gin.Context) {
 // GetSpeechTechnique 获取单个语音技巧
 func (h *AdminHandler) GetSpeechTechnique(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var technique models.SpeechTechnique
 	if err := h.db.Where("id = ?", id).First(&technique).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "语音技巧不存在")
@@ -2078,7 +2177,7 @@ func (h *AdminHandler) CreateSpeechTechnique(c *gin.Context) {
 // UpdateSpeechTechnique 更新语音技巧
 func (h *AdminHandler) UpdateSpeechTechnique(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var technique models.SpeechTechnique
 	if err := h.db.Where("id = ?", id).First(&technique).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "语音技巧不存在")
@@ -2167,12 +2266,12 @@ func (h *AdminHandler) TestRoute(c *gin.Context) {
 // GetUserSettings 获取用户设置
 func (h *AdminHandler) GetUserSettings(c *gin.Context) {
 	userID := c.Param("user_id")
-	
+
 	var settings models.UserSettings
 	if err := h.db.Where("user_id = ?", userID).First(&settings).Error; err != nil {
 		// 如果用户设置不存在，返回默认设置
 		settings = models.UserSettings{
-			UserID:                  uuid.MustParse(userID),
+			UserID:                   uuid.MustParse(userID),
 			EnablePushNotifications:  true,
 			EnableEmailNotifications: true,
 			NotificationSound:        true,
@@ -2190,14 +2289,14 @@ func (h *AdminHandler) GetUserSettings(c *gin.Context) {
 			Language:                 "zh-CN",
 		}
 	}
-	
+
 	response.Success(c, settings, "获取成功")
 }
 
 // UpdateUserSettings 更新用户设置
 func (h *AdminHandler) UpdateUserSettings(c *gin.Context) {
 	userID := c.Param("user_id")
-	
+
 	var req struct {
 		EnablePushNotifications  *bool   `json:"enable_push_notifications,omitempty"`
 		EnableEmailNotifications *bool   `json:"enable_email_notifications,omitempty"`
@@ -2216,19 +2315,19 @@ func (h *AdminHandler) UpdateUserSettings(c *gin.Context) {
 		FontSize                 *string `json:"font_size,omitempty"`
 		Language                 *string `json:"language,omitempty"`
 	}
-	
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.Error(c, http.StatusBadRequest, "参数错误: "+err.Error())
 		return
 	}
-	
+
 	var settings models.UserSettings
 	result := h.db.Where("user_id = ?", userID).First(&settings)
-	
+
 	if result.Error != nil {
 		// 用户设置不存在，创建新的
 		settings = models.UserSettings{
-			UserID:                  uuid.MustParse(userID),
+			UserID:                   uuid.MustParse(userID),
 			EnablePushNotifications:  true,
 			EnableEmailNotifications: true,
 			NotificationSound:        true,
@@ -2246,7 +2345,7 @@ func (h *AdminHandler) UpdateUserSettings(c *gin.Context) {
 			Language:                 "zh-CN",
 		}
 	}
-	
+
 	// 更新字段
 	if req.EnablePushNotifications != nil {
 		settings.EnablePushNotifications = *req.EnablePushNotifications
@@ -2296,7 +2395,7 @@ func (h *AdminHandler) UpdateUserSettings(c *gin.Context) {
 	if req.Language != nil {
 		settings.Language = *req.Language
 	}
-	
+
 	if result.Error != nil {
 		// 创建新记录
 		if err := h.db.Create(&settings).Error; err != nil {
@@ -2310,7 +2409,7 @@ func (h *AdminHandler) UpdateUserSettings(c *gin.Context) {
 			return
 		}
 	}
-	
+
 	h.logOperation(c, "UpdateUserSettings", "UserSettings", userID, "用户设置更新成功", "Success")
 	response.Success(c, settings, "更新成功")
 }
@@ -2320,34 +2419,34 @@ func (h *AdminHandler) GetAllUserSettings(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "20"))
 	offset := (page - 1) * pageSize
-	
+
 	var settings []models.UserSettings
 	var total int64
-	
+
 	query := h.db.Model(&models.UserSettings{})
-	
+
 	// 按用户ID筛选
 	if userID := c.Query("user_id"); userID != "" {
 		query = query.Where("user_id = ?", userID)
 	}
-	
+
 	// 按主题筛选
 	if theme := c.Query("theme"); theme != "" {
 		query = query.Where("theme = ?", theme)
 	}
-	
+
 	// 按难度筛选
 	if difficulty := c.Query("difficulty_level"); difficulty != "" {
 		query = query.Where("difficulty_level = ?", difficulty)
 	}
-	
+
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("updated_at DESC").Find(&settings).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
-	
+
 	response.Success(c, gin.H{
 		"settings":  settings,
 		"total":     total,
@@ -2359,9 +2458,9 @@ func (h *AdminHandler) GetAllUserSettings(c *gin.Context) {
 // ResetUserSettings 重置用户设置为默认值
 func (h *AdminHandler) ResetUserSettings(c *gin.Context) {
 	userID := c.Param("user_id")
-	
+
 	settings := models.UserSettings{
-		UserID:                  uuid.MustParse(userID),
+		UserID:                   uuid.MustParse(userID),
 		EnablePushNotifications:  true,
 		EnableEmailNotifications: true,
 		NotificationSound:        true,
@@ -2378,16 +2477,16 @@ func (h *AdminHandler) ResetUserSettings(c *gin.Context) {
 		FontSize:                 "medium",
 		Language:                 "zh-CN",
 	}
-	
+
 	// 先删除现有设置
 	h.db.Where("user_id = ?", userID).Delete(&models.UserSettings{})
-	
+
 	// 创建默认设置
 	if err := h.db.Create(&settings).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "重置用户设置失败")
 		return
 	}
-	
+
 	h.logOperation(c, "ResetUserSettings", "UserSettings", userID, "用户设置重置成功", "Success")
 	response.Success(c, settings, "重置成功")
 }
@@ -2399,34 +2498,34 @@ func (h *AdminHandler) GetFeedbackList(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "20"))
 	offset := (page - 1) * pageSize
-	
+
 	var feedbacks []models.Feedback
 	var total int64
-	
+
 	query := h.db.Model(&models.Feedback{}).Preload("User")
-	
+
 	// 按类型筛选
 	if feedbackType := c.Query("type"); feedbackType != "" {
 		query = query.Where("type = ?", feedbackType)
 	}
-	
+
 	// 按状态筛选
 	if status := c.Query("status"); status != "" {
 		query = query.Where("status = ?", status)
 	}
-	
+
 	// 按用户ID筛选
 	if userID := c.Query("user_id"); userID != "" {
 		query = query.Where("user_id = ?", userID)
 	}
-	
+
 	query.Count(&total)
-	
+
 	if err := query.Offset(offset).Limit(pageSize).Order("created_at DESC").Find(&feedbacks).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "查询失败")
 		return
 	}
-	
+
 	response.Success(c, gin.H{
 		"feedbacks": feedbacks,
 		"total":     total,
@@ -2438,46 +2537,46 @@ func (h *AdminHandler) GetFeedbackList(c *gin.Context) {
 // GetFeedback 获取反馈详情
 func (h *AdminHandler) GetFeedback(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var feedback models.Feedback
 	if err := h.db.Preload("User").Where("id = ?", id).First(&feedback).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "反馈不存在")
 		return
 	}
-	
+
 	response.Success(c, feedback, "获取成功")
 }
 
 // UpdateFeedbackStatus 更新反馈状态
 func (h *AdminHandler) UpdateFeedbackStatus(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	var req struct {
 		Status   string  `json:"status" binding:"required,oneof=pending processing resolved"`
 		Response *string `json:"response,omitempty"`
 	}
-	
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.Error(c, http.StatusBadRequest, "参数错误: "+err.Error())
 		return
 	}
-	
+
 	var feedback models.Feedback
 	if err := h.db.Where("id = ?", id).First(&feedback).Error; err != nil {
 		response.Error(c, http.StatusNotFound, "反馈不存在")
 		return
 	}
-	
+
 	feedback.Status = req.Status
 	if req.Response != nil {
 		feedback.Response = req.Response
 	}
-	
+
 	if err := h.db.Save(&feedback).Error; err != nil {
 		response.Error(c, http.StatusInternalServerError, "更新失败")
 		return
 	}
-	
+
 	h.logOperation(c, "UpdateFeedbackStatus", "Feedback", feedback.ID.String(), "反馈状态更新成功", "Success")
 	response.Success(c, feedback, "更新成功")
 }
@@ -2485,13 +2584,13 @@ func (h *AdminHandler) UpdateFeedbackStatus(c *gin.Context) {
 // DeleteFeedback 删除反馈
 func (h *AdminHandler) DeleteFeedback(c *gin.Context) {
 	id := c.Param("id")
-	
+
 	if err := h.db.Where("id = ?", id).Delete(&models.Feedback{}).Error; err != nil {
 		h.logOperation(c, "DeleteFeedback", "Feedback", id, "删除反馈失败: "+err.Error(), "Failure")
 		response.Error(c, http.StatusInternalServerError, "删除失败")
 		return
 	}
-	
+
 	h.logOperation(c, "DeleteFeedback", "Feedback", id, "删除反馈成功", "Success")
 	response.Success(c, nil, "删除成功")
 }
@@ -2507,7 +2606,7 @@ func (h *AdminHandler) GetFeedbackStats(c *gin.Context) {
 		FeedbackCount   int64 `json:"feedback_count"`
 		SuggestionCount int64 `json:"suggestion_count"`
 	}
-	
+
 	h.db.Model(&models.Feedback{}).Count(&stats.TotalCount)
 	h.db.Model(&models.Feedback{}).Where("status = ?", "pending").Count(&stats.PendingCount)
 	h.db.Model(&models.Feedback{}).Where("status = ?", "processing").Count(&stats.ProcessingCount)
@@ -2515,7 +2614,7 @@ func (h *AdminHandler) GetFeedbackStats(c *gin.Context) {
 	h.db.Model(&models.Feedback{}).Where("type = ?", "bug").Count(&stats.BugCount)
 	h.db.Model(&models.Feedback{}).Where("type = ?", "feedback").Count(&stats.FeedbackCount)
 	h.db.Model(&models.Feedback{}).Where("type = ?", "suggestion").Count(&stats.SuggestionCount)
-	
+
 	response.Success(c, stats, "获取成功")
 }
 

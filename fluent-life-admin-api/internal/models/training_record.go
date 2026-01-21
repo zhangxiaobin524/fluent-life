@@ -39,7 +39,7 @@ type TrainingRecord struct {
 	Timestamp time.Time `gorm:"not null;index:idx_training_records_timestamp;index:idx_training_records_user_timestamp" json:"timestamp"`
 	CreatedAt time.Time `json:"created_at"`
 
-	User User `gorm:"foreignKey:UserID" json:"-"`
+	User User `gorm:"foreignKey:UserID" json:"user"`
 }
 
 func (t *TrainingRecord) BeforeCreate(tx *gorm.DB) error {

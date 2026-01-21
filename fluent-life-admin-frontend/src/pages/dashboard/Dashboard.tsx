@@ -84,15 +84,11 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const weeklyData = [
-    { name: '周一', 训练: 120, 用户: 45 },
-    { name: '周二', 训练: 132, 用户: 52 },
-    { name: '周三', 训练: 101, 用户: 38 },
-    { name: '周四', 训练: 134, 用户: 48 },
-    { name: '周五', 训练: 90, 用户: 35 },
-    { name: '周六', 训练: 230, 用户: 78 },
-    { name: '周日', 训练: 210, 用户: 65 },
-  ];
+  const weeklyData = (stats?.weekly_trend || []).map((d: any) => ({
+    name: d.name,
+    训练: d.training_mins || 0,
+    用户: d.active_users || 0,
+  }));
 
   // 训练类型分布数据
   const trainingTypeData = stats?.training_type_distribution || [

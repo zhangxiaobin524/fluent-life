@@ -203,7 +203,7 @@ const AIRoles: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">AI模拟角色管理</h1>
+        <h1 className="text-2xl font-bold text-gray-900">AI模拟角色</h1>
         <div className="flex gap-3">
           <Button onClick={handleInitFromConfig} variant="ghost" className="flex items-center gap-2">
             从配置文件初始化

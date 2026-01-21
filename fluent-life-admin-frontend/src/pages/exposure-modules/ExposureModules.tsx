@@ -295,7 +295,7 @@ const ExposureModules: React.FC = () => {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">脱敏练习场景管理</h1>
+          <h1 className="text-2xl font-bold text-gray-900">脱敏练习场景</h1>
           <p className="text-sm text-gray-500 mt-1">管理脱敏练习的场景和步骤配置</p>
         </div>
         <Button onClick={handleAdd} icon={<Plus size={16} />}>

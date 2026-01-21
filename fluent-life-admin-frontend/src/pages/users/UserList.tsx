@@ -19,6 +19,13 @@ const UserList: React.FC = () => {
 
   useEffect(() => {
     loadUsers();
+    
+    // 每30秒刷新一次在线状态
+    const interval = setInterval(() => {
+      loadUsers();
+    }, 30000);
+    
+    return () => clearInterval(interval);
   }, [page]);
 
   const loadUsers = async () => {
@@ -103,7 +110,7 @@ const UserList: React.FC = () => {
     },
     {
       key: 'status',
-      title: '状态',
+      title: '账号状态',
       dataIndex: 'status' as keyof User,
       render: (value: number) => (
         <span
@@ -114,9 +121,53 @@ const UserList: React.FC = () => {
           }`}
         >
           {value === 1 ? '正常' : '禁用'}
-    </span>
-  ),
-},
+        </span>
+      ),
+    },
+    {
+      key: 'online_status',
+      title: '在线状态',
+      render: (_: any, record: User) => {
+        // 判断是否在线
+        const isOnline = (() => {
+          // 如果后端直接返回is_online字段，优先使用
+          if (record.is_online === true) return true;
+          if (record.is_online === false) return false;
+          
+          // 如果有last_active_at，根据最后活跃时间判断（30分钟内活跃算在线）
+          if (record.last_active_at) {
+            const lastActiveTime = new Date(record.last_active_at).getTime();
+            const now = Date.now();
+            const minutesSinceActive = (now - lastActiveTime) / (1000 * 60);
+            return minutesSinceActive <= 30;
+          }
+          
+          // 如果没有last_active_at，根据last_login_at判断（60分钟内登录算在线）
+          if (record.last_login_at) {
+            const lastLoginTime = new Date(record.last_login_at).getTime();
+            const now = Date.now();
+            const minutesSinceLogin = (now - lastLoginTime) / (1000 * 60);
+            return minutesSinceLogin <= 60;
+          }
+          
+          return false;
+        })();
+        
+        return (
+          <div className="flex items-center gap-2">
+            <span
+              className={`w-2 h-2 rounded-full ${
+                isOnline ? 'bg-green-500 animate-pulse' : 'bg-gray-300'
+              }`}
+              title={isOnline ? '在线' : '离线'}
+            />
+            <span className={`text-xs font-medium ${isOnline ? 'text-green-600' : 'text-gray-500'}`}>
+              {isOnline ? '在线' : '离线'}
+            </span>
+          </div>
+        );
+      },
+    },
 {
   key: 'gender',
   title: '性别',

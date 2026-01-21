@@ -8,6 +8,8 @@ import UserTrainingRecords from './pages/UserTrainingRecords';
 import Posts from './pages/Posts';
 import Rooms from './pages/Rooms';
 import Training from './pages/Training';
+import CorrectionCenter from './pages/CorrectionCenter';
+import RandomMatch from './pages/RandomMatch';
 import Permission from './pages/permission';
 import Settings from './pages/settings';
 import TongueTwisters from './pages/tongue-twisters';
@@ -123,6 +125,30 @@ function App() {
             isAuthenticated ? (
               <Layout onLogout={() => setIsAuthenticated(false)}>
                 <Training />
+              </Layout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/random-match"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={() => setIsAuthenticated(false)}>
+                <RandomMatch />
+              </Layout>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/correction-center"
+          element={
+            isAuthenticated ? (
+              <Layout onLogout={() => setIsAuthenticated(false)}>
+                <CorrectionCenter />
               </Layout>
             ) : (
               <Navigate to="/login" replace />

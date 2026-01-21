@@ -114,6 +114,9 @@ func main() {
 			admin.PUT("/training/records/:id", adminHandler.UpdateTrainingRecord)
 			admin.POST("/training/records/delete-batch", adminHandler.DeleteTrainingRecord)
 
+			// 随机匹配记录
+			admin.GET("/random-match", adminHandler.GetRandomMatchRecords)
+
 			// 操作日志管理
 			admin.GET("/operation-logs", adminHandler.GetOperationLogs)
 			admin.GET("/operation-logs/:id", adminHandler.GetOperationLog)
