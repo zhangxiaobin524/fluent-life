@@ -54717,3 +54717,138 @@ Error: Cannot apply unknown utility class `fade-in`
 
   Plugin: vite:esbuild
   File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:01 PM [vite] (client) hmr update /App.tsx, /styles/enhanced-styles.css, /components/AirflowExercise.tsx
+12:31:01 PM [vite] (client) hmr update /components/ProfileModule.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload components/LearningPartner.tsx
+12:31:01 PM [vite] (client) page reload components/WeeklyHeatmap.tsx
+12:31:01 PM [vite] (client) hmr update /components/TermsOfService.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload components/SkillRadar.tsx
+12:31:01 PM [vite] (client) hmr update /components/PrivacyPolicy.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /components/PostDetailPage.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /components/FollowList.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload components/CorrectionDashboard.tsx
+12:31:01 PM [vite] (client) hmr update /components/AIMentorModule.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload components/StatsView.tsx
+12:31:01 PM [vite] (client) page reload components/DataDashboard.tsx
+12:31:01 PM [vite] (client) hmr update /App.tsx, /styles/enhanced-styles.css, /components/AirflowExercise.tsx
+12:31:01 PM [vite] (client) hmr update /components/MoreTools.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /components/AuthOverlay.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload index.tsx
+12:31:01 PM [vite] (client) page reload tailwind.config.js
+12:31:01 PM [vite] (client) hmr update /components/ExposureExercise.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /components/CorrectionModule.tsx, /styles/enhanced-styles.css, /components/AirflowExercise.tsx, /components/ExposureExercise.tsx
+12:31:01 PM [vite] (client) page reload finger-method-fix.tsx
+12:31:01 PM [vite] (client) hmr update /components/AirflowExercise.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) hmr update /components/PracticeRoom.tsx, /styles/enhanced-styles.css
+12:31:01 PM [vite] (client) page reload utils/i18n.ts
+12:31:01 PM [vite] (client) hmr update /components/VoiceModule.tsx, /styles/enhanced-styles.css, /components/OneOnOneChat.tsx, /components/PracticeRoom.tsx
+12:31:01 PM [vite] (client) hmr update /styles/enhanced-styles.css, /components/MoreTools.tsx
+12:31:01 PM [vite] (client) page reload src/pages/VoiceTypeTest.tsx
+12:31:01 PM [vite] (client) page reload components/ProgressTrend.tsx
+12:31:01 PM [vite] (client) page reload android/app/src/main/AndroidManifest.xml
+12:31:01 PM [vite] (client) page reload index.html
+12:31:01 PM [vite] (client) page reload capacitor.config.ts
+12:31:02 PM [vite] (client) hmr update /components/ProfileModule.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) page reload components/LearningPartner.tsx
+12:31:02 PM [vite] (client) page reload components/WeeklyHeatmap.tsx
+12:31:02 PM [vite] (client) page reload components/SkillRadar.tsx
+12:31:02 PM [vite] (client) hmr update /components/TermsOfService.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/PostDetailPage.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/PrivacyPolicy.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/AIMentorModule.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/FollowList.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) page reload components/StatsView.tsx
+12:31:02 PM [vite] (client) page reload components/CorrectionDashboard.tsx
+12:31:02 PM [vite] (client) page reload components/DataDashboard.tsx
+12:31:02 PM [vite] (client) hmr update /components/MoreTools.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/AuthOverlay.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) page reload tailwind.config.js
+12:31:02 PM [vite] (client) page reload index.tsx
+12:31:02 PM [vite] (client) hmr update /components/CorrectionModule.tsx, /styles/enhanced-styles.css, /components/AirflowExercise.tsx, /components/ExposureExercise.tsx
+12:31:02 PM [vite] (client) hmr update /components/AirflowExercise.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) hmr update /components/PracticeRoom.tsx, /styles/enhanced-styles.css
+12:31:02 PM [vite] (client) page reload utils/i18n.ts
+12:31:02 PM [vite] (client) page reload finger-method-fix.tsx
+12:31:02 PM [vite] (client) hmr update /components/ExposureExercise.tsx, /styles/enhanced-styles.css
+12:31:04 PM [vite] (client) warning: Duplicate key "settings" in object literal
+1183|      'no_records': 'No Records',
+1184|      'start_first_practice': 'Start your first practice',
+1185|      'settings': 'Settings',
+   |      ^
+1186|      'logout': 'Logout',
+1187|      'edit_profile': 'Edit Profile',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_intensity" in object literal
+1541|      'airflow_advanced_exercises': 'Complete <b>1</b> advanced exercise (long tone/breath control/finger method)',
+1542|      'airflow_try_various_methods': 'It is recommended to try various practice methods to comprehensively improve airflow control ability',
+1543|      'airflow_intensity': 'Intensity',
+   |      ^
+1544|      'airflow_intensity_low': 'Low Intensity',
+1545|      'airflow_intensity_medium': 'Medium Intensity',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_lip_trill_step_4" in object literal
+1585|      'airflow_candle_tip_7': 'System will automatically recognize and count',
+1586|      'airflow_enable_mic': 'Enable Microphone to Start Practice',
+1587|      'airflow_lip_trill_step_4': 'Maintain continuous "brrr" vibration sound',
+   |      ^
+1588|      'airflow_lip_trill_step_5': 'Feel facial tension release, maintain relaxed state',
+1589|      'airflow_finger_guide_title': 'Finger Method Correction Guide',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_completed" in object literal
+1607|      'airflow_practice_detail': 'Airflow regulation practice helps master soft onset techniques, making your voice more fluent and natural. By controlling airflow, you can reduce stuttering and speak more smoothly. Stable airflow intensity (30-60) is key to soft onset, effectively helping improve stuttering issues.',
+1608|      'airflow_today_goal': 'Today\'s Goal',
+1609|      'airflow_completed': 'Completed',
+   |      ^
+1610|      'airflow_target_times': 'Target {times} times',
+1611|      'airflow_continuous_blow_time': 'Continuous Blow Time',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "settings" in object literal
+1183|      'no_records': 'No Records',
+1184|      'start_first_practice': 'Start your first practice',
+1185|      'settings': 'Settings',
+   |      ^
+1186|      'logout': 'Logout',
+1187|      'edit_profile': 'Edit Profile',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_intensity" in object literal
+1541|      'airflow_advanced_exercises': 'Complete <b>1</b> advanced exercise (long tone/breath control/finger method)',
+1542|      'airflow_try_various_methods': 'It is recommended to try various practice methods to comprehensively improve airflow control ability',
+1543|      'airflow_intensity': 'Intensity',
+   |      ^
+1544|      'airflow_intensity_low': 'Low Intensity',
+1545|      'airflow_intensity_medium': 'Medium Intensity',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_lip_trill_step_4" in object literal
+1585|      'airflow_candle_tip_7': 'System will automatically recognize and count',
+1586|      'airflow_enable_mic': 'Enable Microphone to Start Practice',
+1587|      'airflow_lip_trill_step_4': 'Maintain continuous "brrr" vibration sound',
+   |      ^
+1588|      'airflow_lip_trill_step_5': 'Feel facial tension release, maintain relaxed state',
+1589|      'airflow_finger_guide_title': 'Finger Method Correction Guide',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts
+12:31:04 PM [vite] (client) warning: Duplicate key "airflow_completed" in object literal
+1607|      'airflow_practice_detail': 'Airflow regulation practice helps master soft onset techniques, making your voice more fluent and natural. By controlling airflow, you can reduce stuttering and speak more smoothly. Stable airflow intensity (30-60) is key to soft onset, effectively helping improve stuttering issues.',
+1608|      'airflow_today_goal': 'Today\'s Goal',
+1609|      'airflow_completed': 'Completed',
+   |      ^
+1610|      'airflow_target_times': 'Target {times} times',
+1611|      'airflow_continuous_blow_time': 'Continuous Blow Time',
+
+  Plugin: vite:esbuild
+  File: /Users/zhangxiaobin/self-project/fluent-life-frontend/utils/i18n.ts

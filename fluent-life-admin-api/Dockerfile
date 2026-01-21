@@ -1,5 +1,6 @@
 # Stage 1: Build the Go application
-FROM golang:1.21-alpine AS builder
+# go.mod requires go >= 1.24.6
+FROM golang:1.24.6-alpine AS builder
 
 WORKDIR /app
 
